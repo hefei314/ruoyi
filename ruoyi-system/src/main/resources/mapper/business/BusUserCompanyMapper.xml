@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusUserCompanyMapper">
+
+    <resultMap type="BusUserCompany" id="BusUserCompanyResult">
+        <result property="userId" column="user_id"/>
+        <result property="companyId" column="company_id"/>
+    </resultMap>
+
+    <insert id="insertUserCompany" parameterType="BusUserCompany">
+		insert into bus_user_company(user_id, company_id)
+		values (#{userId}, #{companyId})
+	</insert>
+
+    <select id="countUserCompany" parameterType="BusUserCompany" resultType="Integer">
+		select count(1) from bus_user_company where user_id = #{userId} AND company_id = #{companyId}
+	</select>
+
+    <delete id="deleteUserCompany" parameterType="BusUserCompany">
+		delete from bus_user_company where user_id = #{userId} AND company_id = #{companyId}
+	</delete>
+
+    <delete id="deleteUserCompanyByUserId" parameterType="Long">
+		delete from bus_user_company where user_id = #{userId}
+	</delete>
+
+    <select id="countUserCompanyByCompanyId" resultType="Integer">
+	    select count(1) from bus_user_company where company_id = #{companyId}
+	</select>
+
+</mapper> 

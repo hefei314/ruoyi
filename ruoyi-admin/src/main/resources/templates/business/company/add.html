@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="include :: header('新增商户信息')"/>
+    <th:block th:include="include :: datetimepicker-css"/>
+    <th:block th:include="include :: bootstrap-fileinput-css"/>
+</head>
+<body class="white-bg">
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <form class="form-horizontal m" id="form-company-add">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">公司简称：</label>
+            <div class="col-sm-8">
+                <input name="shortName" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">公司名称：</label>
+            <div class="col-sm-8">
+                <input name="companyName" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">法定代表：</label>
+            <div class="col-sm-8">
+                <input name="legalPerson" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">联系方式：</label>
+            <div class="col-sm-8">
+                <input name="contactWay" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">营业时间：</label>
+            <div class="row">
+                <div class="col-sm-3">
+                    <select name="openingStartTime" class="form-control"
+                            th:with="type=${@dict.getType('bus_opening_time')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}"
+                                th:value="${dict.dictLabel}"></option>
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <select name="openingEndTime" class="form-control"
+                            th:with="type=${@dict.getType('bus_opening_time')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}"
+                                th:value="${dict.dictLabel}"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">公司规模：</label>
+            <div class="col-sm-8">
+                <select name="scale" class="form-control" th:with="type=${@dict.getType('bus_company_scale')}">
+                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">注册资本：</label>
+            <div class="col-sm-8">
+                <select name="registerCapital" class="form-control"
+                        th:with="type=${@dict.getType('bus_register_capital')}">
+                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">注册时间：</label>
+            <div class="col-sm-8">
+                <div class="input-group date">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input name="registerDate" type="text" class="form-control" id="datetimepicker-registerDate"
+                           placeholder="yyyy-MM-dd">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">公司地址：</label>
+            <div id="select-address" class="row" data-json-name="name" data-json-value="areaId">
+                <div class="col-sm-2">
+                    <select name="provinceId" class="province form-control" data-first-title="选择省"
+                            data-url="provinceData">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <select name="cityId" class="city form-control" data-first-title="选择市" data-url="cityData">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <select name="areaId" class="area form-control" data-first-title="选择地区" data-url="areaData">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">详细地址：</label>
+            <div class="col-sm-8">
+                <input name="address" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">主营类别：</label>
+            <div class="col-sm-8">
+                <select name="classifyId" class="form-control">
+                    <option th:each="classify : ${classifys}" th:text="${classify.classifyName}"
+                            th:value="${classify.classifyId}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">会员标志：</label>
+            <div class="col-sm-8">
+                <div class="radio-box" th:each="dict : ${@dict.getType('sys_yes_no')}">
+                    <input type="radio" th:id="${'flag_' + dict.dictCode}" name="memberFlag"
+                           th:value="${dict.dictValue}"
+                           th:checked="${dict.default}">
+                    <label th:for="${'flag_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">会员开通时间：</label>
+            <div class="col-sm-8">
+                <div class="input-group date">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input name="memberBeginDate" type="text" class="form-control" id="datetimepicker-memberBeginDate"
+                           placeholder="yyyy-MM-dd">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">会员到期时间：</label>
+            <div class="col-sm-8">
+                <div class="input-group date">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input name="memberEndDate" type="text" class="form-control" id="datetimepicker-memberEndDate"
+                           placeholder="yyyy-MM-dd">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">会员排序：</label>
+            <div class="col-sm-8">
+                <input name="memberOrder" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">会员地址：</label>
+            <div id="select-member-address" class="row" data-json-name="name" data-json-value="areaId">
+                <div class="col-sm-2">
+                    <select name="memberProvinceId" class="province form-control" data-first-title="选择省"
+                            data-url="provinceData">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <select name="memberCityId" class="city form-control" data-first-title="选择市"
+                            data-url="memberCityData">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <select name="memberAreaId" class="area form-control" data-first-title="选择地区"
+                            data-url="memberAreaData">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">公司官网：</label>
+            <div class="col-sm-8">
+                <input name="website" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">主营业务：</label>
+            <div class="col-sm-8">
+                <textarea name="companyBusiness" class="form-control"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">公司介绍：</label>
+            <div class="col-sm-8">
+                <textarea name="introduction" class="form-control"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">公司状态：</label>
+            <div class="col-sm-8">
+                <div class="radio-box" th:each="dict : ${@dict.getType('sys_normal_disable')}">
+                    <input type="radio" th:id="${'status_' + dict.dictCode}" name="status" th:value="${dict.dictValue}"
+                           th:checked="${dict.default}">
+                    <label th:for="${'status_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">公司LOGO：</label>
+            <div class="col-sm-8">
+                <input type="hidden" name="companyLogo">
+                <div class="file-loading">
+                    <input class="form-control file-upload" id="companyLogo" name="file" type="file">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">营业执照：</label>
+            <div class="col-sm-8">
+                <input type="hidden" name="businessLicense">
+                <div class="file-loading">
+                    <input class="form-control file-upload" id="businessLicense" name="file" type="file">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">身份证正面：</label>
+            <div class="col-sm-8">
+                <input type="hidden" name="identityCardFront">
+                <div class="file-loading">
+                    <input class="form-control file-upload" id="identityCardFront" name="file" type="file">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">身份证背面：</label>
+            <div class="col-sm-8">
+                <input type="hidden" name="identityCardBack">
+                <div class="file-loading">
+                    <input class="form-control file-upload" id="identityCardBack" name="file" type="file">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<th:block th:include="include :: footer"/>
+<th:block th:include="include :: datetimepicker-js"/>
+<th:block th:include="include :: jquery-cxselect-js"/>
+<th:block th:include="include :: bootstrap-fileinput-js"/>
+<script th:inline="javascript">
+    var prefix = ctx + "business/company"
+    $("#form-company-add").validate({
+        focusCleanup: true
+    });
+
+    function submitHandler() {
+        if ($.validate.form()) {
+            $.operate.save(prefix + "/add", $('#form-company-add').serialize());
+        }
+    }
+
+    $('#select-address').cxSelect({
+        selects: ['province', 'city', 'area'],
+        nodata: 'none'
+    });
+
+    $('#select-member-address').cxSelect({
+        selects: ['province', 'city', 'area'],
+        nodata: 'none'
+    });
+
+    $("#datetimepicker-registerDate").datetimepicker({
+        format: "yyyy-mm-dd",
+        minView: "month",
+        autoclose: true
+    });
+
+    $("#datetimepicker-memberBeginDate").datetimepicker({
+        format: "yyyy-mm-dd",
+        minView: "month",
+        autoclose: true
+    });
+
+    $("#datetimepicker-memberEndDate").datetimepicker({
+        format: "yyyy-mm-dd",
+        minView: "month",
+        autoclose: true
+    });
+
+    $(".file-upload").fileinput({
+        uploadUrl: ctx + 'common/upload',
+        maxFileCount: 1,
+        autoReplace: true
+    }).on('fileuploaded', function (event, data, previewId, index) {
+        $("input[name='" + event.currentTarget.id + "']").val(data.response.url)
+    }).on('fileremoved', function (event, id, index) {
+        $("input[name='" + event.currentTarget.id + "']").val('')
+    })
+</script>
+</body>
+</html>

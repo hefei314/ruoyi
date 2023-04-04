@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusFeedbackMapper">
+    
+    <resultMap type="BusFeedback" id="BusFeedbackResult">
+        <result property="feedbackId"    column="feedback_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="feedbackContent"    column="feedback_content"    />
+        <result property="feedbackBy"    column="feedback_by"    />
+        <result property="feedbackTime"    column="feedback_time"    />
+    </resultMap>
+
+    <sql id="selectBusFeedbackVo">
+        select feedback_id, user_id, feedback_content, feedback_by, feedback_time from bus_feedback
+    </sql>
+
+    <select id="selectBusFeedbackList" parameterType="BusFeedback" resultMap="BusFeedbackResult">
+        <include refid="selectBusFeedbackVo"/>
+        <where>  
+            <if test="feedbackContent != null  and feedbackContent != ''"> and feedback_content = #{feedbackContent}</if>
+            <if test="feedbackBy != null  and feedbackBy != ''"> and feedback_by = #{feedbackBy}</if>
+            <if test="params.beginFeedbackTime != null and params.beginFeedbackTime != '' and params.endFeedbackTime != null and params.endFeedbackTime != ''"> and feedback_time between #{params.beginFeedbackTime} and #{params.endFeedbackTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectBusFeedbackByFeedbackId" parameterType="Long" resultMap="BusFeedbackResult">
+        <include refid="selectBusFeedbackVo"/>
+        where feedback_id = #{feedbackId}
+    </select>
+        
+    <insert id="insertBusFeedback" parameterType="BusFeedback" useGeneratedKeys="true" keyProperty="feedbackId">
+        insert into bus_feedback
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="feedbackContent != null">feedback_content,</if>
+            <if test="feedbackBy != null">feedback_by,</if>
+            <if test="feedbackTime != null">feedback_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="feedbackContent != null">#{feedbackContent},</if>
+            <if test="feedbackBy != null">#{feedbackBy},</if>
+            <if test="feedbackTime != null">#{feedbackTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusFeedback" parameterType="BusFeedback">
+        update bus_feedback
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="feedbackContent != null">feedback_content = #{feedbackContent},</if>
+            <if test="feedbackBy != null">feedback_by = #{feedbackBy},</if>
+            <if test="feedbackTime != null">feedback_time = #{feedbackTime},</if>
+        </trim>
+        where feedback_id = #{feedbackId}
+    </update>
+
+    <delete id="deleteBusFeedbackByFeedbackId" parameterType="Long">
+        delete from bus_feedback where feedback_id = #{feedbackId}
+    </delete>
+
+    <delete id="deleteBusFeedbackByFeedbackIds" parameterType="String">
+        delete from bus_feedback where feedback_id in 
+        <foreach item="feedbackId" collection="array" open="(" separator="," close=")">
+            #{feedbackId}
+        </foreach>
+    </delete>
+
+</mapper>

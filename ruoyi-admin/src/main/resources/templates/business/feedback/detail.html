@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="include :: header('意见反馈详细')"/>
+    <th:block th:include="include :: datetimepicker-css"/>
+</head>
+<body class="white-bg">
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <form class="form-horizontal m-t" id="form-feedback-edit" th:object="${busFeedback}">
+        <input name="feedbackId" th:field="*{feedbackId}" type="hidden">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">反馈内容：</label>
+            <div class="form-control-static" th:text="${busFeedback.feedbackContent}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">反馈者：</label>
+            <div class="form-control-static" th:text="${busFeedback.feedbackBy}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">反馈时间：</label>
+            <div class="form-control-static" th:text="${#dates.format(busFeedback.feedbackTime, 'yyyy-MM-dd')}">
+            </div>
+        </div>
+    </form>
+</div>
+<th:block th:include="include :: footer"/>
+<th:block th:include="include :: datetimepicker-js"/>
+<script th:inline="javascript">
+    $(function () {
+
+    });
+</script>
+</body>
+</html>

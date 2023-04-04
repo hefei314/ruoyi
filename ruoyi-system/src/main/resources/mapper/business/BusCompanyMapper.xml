@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusCompanyMapper">
+    
+    <resultMap type="BusCompany" id="BusCompanyResult">
+        <result property="companyId"    column="company_id"    />
+        <result property="classifyId"    column="classify_id"    />
+        <result property="classifyName"    column="classify_name"    />
+        <result property="userId"    column="user_id"    />
+        <result property="shortName"    column="short_name"    />
+        <result property="companyName"    column="company_name"    />
+        <result property="companyLogo"    column="company_logo"    />
+        <result property="website"    column="website"    />
+        <result property="contactWay"    column="contact_way"    />
+        <result property="legalPerson"    column="legal_person"    />
+        <result property="registerDate"    column="register_date"    />
+        <result property="openingStartTime"    column="opening_start_time"    />
+        <result property="openingEndTime"    column="opening_end_time"    />
+        <result property="scale"    column="scale"    />
+        <result property="scaleName"    column="scale_name"    />
+        <result property="registerCapital"    column="register_capital"    />
+        <result property="registerCapitalName"    column="register_capital_name"    />
+        <result property="companyBusiness"    column="company_business"    />
+        <result property="introduction"    column="introduction"    />
+        <result property="provinceId"    column="province_id"    />
+        <result property="provinceName"    column="province_name"    />
+        <result property="cityId"    column="city_id"    />
+        <result property="cityName"    column="city_name"    />
+        <result property="areaId"    column="area_id"    />
+        <result property="areaName"    column="area_name"    />
+        <result property="address"    column="address"    />
+        <result property="latitude"    column="latitude"    />
+        <result property="longitude"    column="longitude"    />
+        <result property="businessLicense"    column="business_license"    />
+        <result property="identityCardFront"    column="identity_card_front"    />
+        <result property="identityCardBack"    column="identity_card_back"    />
+        <result property="status"    column="status"    />
+        <result property="memberFlag"    column="member_flag"    />
+        <result property="memberBeginDate"    column="member_begin_date"    />
+        <result property="memberEndDate"    column="member_end_date"    />
+        <result property="memberProvinceId"    column="member_province_id"    />
+        <result property="memberProvinceName"    column="member_province_name"    />
+        <result property="memberCityId"    column="member_city_id"    />
+        <result property="memberCityName"    column="member_city_name"    />
+        <result property="memberAreaId"    column="member_area_id"    />
+        <result property="memberAreaName"    column="member_area_name"    />
+        <result property="memberOrder"    column="member_order"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateDate"    column="update_date"    />
+    </resultMap>
+
+    <sql id="selectBusCompanyVo">
+        select company_id, classify_id, user_id, short_name, company_name, company_logo, website, contact_way, legal_person, register_date, opening_start_time, opening_end_time, scale, scale_name, register_capital, register_capital_name, company_business, introduction, province_id, province_name, city_id, city_name, area_id, area_name, address, latitude, longitude, business_license, identity_card_front, identity_card_back, status, member_flag, member_begin_date, member_end_date, member_province_id, member_province_name, member_city_id, member_city_name, member_area_id, member_area_name, member_order, del_flag, create_by, create_date, update_by, update_date from bus_company
+    </sql>
+
+    <select id="selectBusCompanyList" parameterType="BusCompany" resultMap="BusCompanyResult">
+        select c.company_id, c.classify_id, p.classify_name, c.user_id, c.short_name, c.company_name, c.company_logo, c.website, c.contact_way, c.legal_person, c.register_date, c.opening_start_time, c.opening_end_time, c.scale, c.scale_name, c.register_capital, c.register_capital_name, c.company_business, c.introduction, c.province_id, c.province_name, c.city_id, c.city_name, c.area_id, c.area_name, c.address, c.latitude, c.longitude, c.business_license, c.identity_card_front, c.identity_card_back, c.status, c.member_flag, c.member_begin_date, c.member_end_date, c.member_province_id, c.member_province_name, c.member_city_id, c.member_city_name, c.member_area_id, c.member_area_name, c.member_order, c.del_flag, c.create_by, c.create_date, c.update_by, c.update_date
+        from bus_company c
+        left join bus_classify p on c.classify_id = p.classify_id
+        <where>
+            <if test="classifyId != null "> and c.classify_id = #{classifyId}</if>
+            <if test="userId != null "> and c.user_id = #{userId}</if>
+            <if test="shortName != null  and shortName != ''"> and c.short_name like concat('%', #{shortName}, '%')</if>
+            <if test="companyName != null  and companyName != ''"> and c.company_name like concat('%', #{companyName}, '%')</if>
+            <if test="companyLogo != null  and companyLogo != ''"> and c.company_logo = #{companyLogo}</if>
+            <if test="website != null  and website != ''"> and c.website = #{website}</if>
+            <if test="contactWay != null  and contactWay != ''"> and c.contact_way = #{contactWay}</if>
+            <if test="legalPerson != null  and legalPerson != ''"> and c.legal_person = #{legalPerson}</if>
+            <if test="registerDate != null "> and c.register_date = #{registerDate}</if>
+            <if test="openingStartTime != null  and openingStartTime != ''"> and c.opening_start_time = #{openingStartTime}</if>
+            <if test="openingEndTime != null  and openingEndTime != ''"> and c.opening_end_time = #{openingEndTime}</if>
+            <if test="scale != null  and scale != ''"> and c.scale = #{scale}</if>
+            <if test="registerCapital != null  and registerCapital != ''"> and c.register_capital = #{registerCapital}</if>
+            <if test="companyBusiness != null  and companyBusiness != ''"> and c.company_business = #{companyBusiness}</if>
+            <if test="introduction != null  and introduction != ''"> and c.introduction = #{introduction}</if>
+            <if test="provinceId != null "> and c.province_id = #{provinceId}</if>
+            <if test="provinceName != null  and provinceName != ''"> and c.province_name like concat('%', #{provinceName}, '%')</if>
+            <if test="cityId != null "> and c.city_id = #{cityId}</if>
+            <if test="cityName != null  and cityName != ''"> and c.city_name like concat('%', #{cityName}, '%')</if>
+            <if test="areaId != null "> and c.area_id = #{areaId}</if>
+            <if test="address != null  and address != ''"> and c.address = #{address}</if>
+            <if test="areaName != null  and areaName != ''"> and c.area_name like concat('%', #{areaName}, '%')</if>
+            <if test="businessLicense != null  and businessLicense != ''"> and c.business_license = #{businessLicense}</if>
+            <if test="identityCardFront != null  and identityCardFront != ''"> and c.identity_card_front = #{identityCardFront}</if>
+            <if test="identityCardBack != null  and identityCardBack != ''"> and c.identity_card_back = #{identityCardBack}</if>
+            <if test="status != null  and status != ''"> and c.status = #{status}</if>
+            <if test="memberFlag != null  and memberFlag != ''"> and c.member_flag = #{memberFlag}</if>
+            <if test="memberBeginDate != null "> and c.member_begin_date = #{memberBeginDate}</if>
+            <if test="memberEndDate != null "> and c.member_end_date = #{memberEndDate}</if>
+            <if test="memberProvinceId != null "> and c.member_province_id = #{memberProvinceId}</if>
+            <if test="memberProvinceName != null  and memberProvinceName != ''"> and c.member_province_name like concat('%', #{memberProvinceName}, '%')</if>
+            <if test="memberCityId != null "> and c.member_city_id = #{memberCityId}</if>
+            <if test="memberCityName != null  and memberCityName != ''"> and c.member_city_name like concat('%', #{memberCityName}, '%')</if>
+            <if test="memberAreaId != null "> and c.member_area_id = #{memberAreaId}</if>
+            <if test="memberAreaName != null  and memberAreaName != ''"> and c.member_area_name like concat('%', #{memberAreaName}, '%')</if>
+            <if test="memberOrder != null  and memberOrder != ''"> and c.member_order = #{memberOrder}</if>
+            <if test="createDate != null "> and c.create_date = #{createDate}</if>
+            <if test="updateDate != null "> and c.update_date = #{updateDate}</if>
+        </where>
+    </select>
+    
+    <select id="selectBusCompanyByCompanyId" parameterType="Long" resultMap="BusCompanyResult">
+        select c.company_id, c.classify_id, p.classify_name, c.user_id, c.short_name, c.company_name, c.company_logo, c.website, c.contact_way, c.legal_person, c.register_date, c.opening_start_time, c.opening_end_time, c.scale, c.scale_name, c.register_capital, c.register_capital_name, c.company_business, c.introduction, c.province_id, c.province_name, c.city_id, c.city_name, c.area_id, c.area_name, c.address, c.latitude, c.longitude, c.business_license, c.identity_card_front, c.identity_card_back, c.status, c.member_flag, c.member_begin_date, c.member_end_date, c.member_province_id, c.member_province_name, c.member_city_id, c.member_city_name, c.member_area_id, c.member_area_name, c.member_order, c.del_flag, c.create_by, c.create_date, c.update_by, c.update_date
+        from bus_company c
+        left join bus_classify p on c.classify_id = p.classify_id
+        where c.company_id = #{companyId}
+    </select>
+
+    <select id="selectBusCompanyByUserId" parameterType="Long" resultMap="BusCompanyResult">
+        <include refid="selectBusCompanyVo"/>
+        where user_id = #{userId}
+    </select>
+
+    <select id="selectBusCompanyByCompanyName" parameterType="String" resultMap="BusCompanyResult">
+        <include refid="selectBusCompanyVo"/>
+        where company_name = #{companyName}
+    </select>
+
+    <select id="selectUserCompanyByUserId" parameterType="Long" resultMap="BusCompanyResult">
+        select c.company_id, c.classify_id, p.classify_name, c.user_id, c.short_name, c.company_name, c.company_logo, c.website, c.contact_way, c.legal_person, c.register_date, c.opening_start_time, c.opening_end_time, c.scale, c.scale_name, c.register_capital, c.register_capital_name, c.company_business, c.introduction, c.province_id, c.province_name, c.city_id, c.city_name, c.area_id, c.area_name, c.address, c.latitude, c.longitude, c.business_license, c.identity_card_front, c.identity_card_back, c.status, c.member_flag, c.member_begin_date, c.member_end_date, c.member_province_id, c.member_province_name, c.member_city_id, c.member_city_name, c.member_area_id, c.member_area_name, c.member_order, c.del_flag, c.create_by, c.create_date, c.update_by, c.update_date
+        from bus_company c
+        left join bus_user_company uc on c.company_id = uc.company_id
+        left join bus_classify p on c.classify_id = p.classify_id
+        where uc.user_id = #{userId}
+    </select>
+
+    <insert id="insertBusCompany" parameterType="BusCompany" useGeneratedKeys="true" keyProperty="companyId">
+        insert into bus_company
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="classifyId != null">classify_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="shortName != null">short_name,</if>
+            <if test="companyName != null">company_name,</if>
+            <if test="companyLogo != null">company_logo,</if>
+            <if test="website != null">website,</if>
+            <if test="contactWay != null">contact_way,</if>
+            <if test="legalPerson != null">legal_person,</if>
+            <if test="registerDate != null">register_date,</if>
+            <if test="openingStartTime != null">opening_start_time,</if>
+            <if test="openingEndTime != null">opening_end_time,</if>
+            <if test="scale != null">scale,</if>
+            <if test="scaleName != null">scale_name,</if>
+            <if test="registerCapital != null">register_capital,</if>
+            <if test="registerCapitalName != null">register_capital_name,</if>
+            <if test="companyBusiness != null">company_business,</if>
+            <if test="introduction != null">introduction,</if>
+            <if test="provinceId != null">province_id,</if>
+            <if test="provinceName != null">province_name,</if>
+            <if test="cityId != null">city_id,</if>
+            <if test="cityName != null">city_name,</if>
+            <if test="areaId != null">area_id,</if>
+            <if test="areaName != null">area_name,</if>
+            <if test="address != null">address,</if>
+            <if test="latitude != null">latitude,</if>
+            <if test="longitude != null">longitude,</if>
+            <if test="businessLicense != null">business_license,</if>
+            <if test="identityCardFront != null">identity_card_front,</if>
+            <if test="identityCardBack != null">identity_card_back,</if>
+            <if test="status != null">status,</if>
+            <if test="memberFlag != null">member_flag,</if>
+            <if test="memberBeginDate != null">member_begin_date,</if>
+            <if test="memberEndDate != null">member_end_date,</if>
+            <if test="memberProvinceId != null">member_province_id,</if>
+            <if test="memberProvinceName != null">member_province_name,</if>
+            <if test="memberCityId != null">member_city_id,</if>
+            <if test="memberCityName != null">member_city_name,</if>
+            <if test="memberAreaId != null">member_area_id,</if>
+            <if test="memberAreaName != null">member_area_name,</if>
+            <if test="memberOrder != null">member_order,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createDate != null">create_date,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateDate != null">update_date,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="classifyId != null">#{classifyId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="shortName != null">#{shortName},</if>
+            <if test="companyName != null">#{companyName},</if>
+            <if test="companyLogo != null">#{companyLogo},</if>
+            <if test="website != null">#{website},</if>
+            <if test="contactWay != null">#{contactWay},</if>
+            <if test="legalPerson != null">#{legalPerson},</if>
+            <if test="registerDate != null">#{registerDate},</if>
+            <if test="openingStartTime != null">#{openingStartTime},</if>
+            <if test="openingEndTime != null">#{openingEndTime},</if>
+            <if test="scale != null">#{scale},</if>
+            <if test="scaleName != null">#{scaleName},</if>
+            <if test="registerCapital != null">#{registerCapital},</if>
+            <if test="registerCapitalName != null">#{registerCapitalName},</if>
+            <if test="companyBusiness != null">#{companyBusiness},</if>
+            <if test="introduction != null">#{introduction},</if>
+            <if test="provinceId != null">#{provinceId},</if>
+            <if test="provinceName != null">#{provinceName},</if>
+            <if test="cityId != null">#{cityId},</if>
+            <if test="cityName != null">#{cityName},</if>
+            <if test="areaId != null">#{areaId},</if>
+            <if test="areaName != null">#{areaName},</if>
+            <if test="address != null">#{address},</if>
+            <if test="latitude != null">#{latitude},</if>
+            <if test="longitude != null">#{longitude},</if>
+            <if test="businessLicense != null">#{businessLicense},</if>
+            <if test="identityCardFront != null">#{identityCardFront},</if>
+            <if test="identityCardBack != null">#{identityCardBack},</if>
+            <if test="status != null">#{status},</if>
+            <if test="memberFlag != null">#{memberFlag},</if>
+            <if test="memberBeginDate != null">#{memberBeginDate},</if>
+            <if test="memberEndDate != null">#{memberEndDate},</if>
+            <if test="memberProvinceId != null">#{memberProvinceId},</if>
+            <if test="memberProvinceName != null">#{memberProvinceName},</if>
+            <if test="memberCityId != null">#{memberCityId},</if>
+            <if test="memberCityName != null">#{memberCityName},</if>
+            <if test="memberAreaId != null">#{memberAreaId},</if>
+            <if test="memberAreaName != null">#{memberAreaName},</if>
+            <if test="memberOrder != null">#{memberOrder},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createDate != null">#{createDate},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateDate != null">#{updateDate},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusCompany" parameterType="BusCompany">
+        update bus_company
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="classifyId != null">classify_id = #{classifyId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="shortName != null">short_name = #{shortName},</if>
+            <if test="companyName != null">company_name = #{companyName},</if>
+            <if test="companyLogo != null">company_logo = #{companyLogo},</if>
+            <if test="website != null">website = #{website},</if>
+            <if test="contactWay != null">contact_way = #{contactWay},</if>
+            <if test="legalPerson != null">legal_person = #{legalPerson},</if>
+            <if test="registerDate != null">register_date = #{registerDate},</if>
+            <if test="openingStartTime != null">opening_start_time = #{openingStartTime},</if>
+            <if test="openingEndTime != null">opening_end_time = #{openingEndTime},</if>
+            <if test="scale != null">scale = #{scale},</if>
+            <if test="scaleName != null">scale_name = #{scaleName},</if>
+            <if test="registerCapital != null">register_capital = #{registerCapital},</if>
+            <if test="registerCapitalName != null">register_capital_name = #{registerCapitalName},</if>
+            <if test="companyBusiness != null">company_business = #{companyBusiness},</if>
+            <if test="introduction != null">introduction = #{introduction},</if>
+            <if test="provinceId != null">province_id = #{provinceId},</if>
+            <if test="provinceName != null">province_name = #{provinceName},</if>
+            <if test="cityId != null">city_id = #{cityId},</if>
+            <if test="cityName != null">city_name = #{cityName},</if>
+            <if test="areaId != null">area_id = #{areaId},</if>
+            <if test="areaName != null">area_name = #{areaName},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="latitude != null">latitude = #{latitude},</if>
+            <if test="longitude != null">longitude = #{longitude},</if>
+            <if test="businessLicense != null">business_license = #{businessLicense},</if>
+            <if test="identityCardFront != null">identity_card_front = #{identityCardFront},</if>
+            <if test="identityCardBack != null">identity_card_back = #{identityCardBack},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="memberFlag != null">member_flag = #{memberFlag},</if>
+            <if test="memberBeginDate != null">member_begin_date = #{memberBeginDate},</if>
+            <if test="memberEndDate != null">member_end_date = #{memberEndDate},</if>
+            <if test="memberProvinceId != null">member_province_id = #{memberProvinceId},</if>
+            <if test="memberProvinceName != null">member_province_name = #{memberProvinceName},</if>
+            <if test="memberCityId != null">member_city_id = #{memberCityId},</if>
+            <if test="memberCityName != null">member_city_name = #{memberCityName},</if>
+            <if test="memberAreaId != null">member_area_id = #{memberAreaId},</if>
+            <if test="memberAreaName != null">member_area_name = #{memberAreaName},</if>
+            <if test="memberOrder != null">member_order = #{memberOrder},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createDate != null">create_date = #{createDate},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateDate != null">update_date = #{updateDate},</if>
+        </trim>
+        where company_id = #{companyId}
+    </update>
+
+    <delete id="deleteBusCompanyByCompanyId" parameterType="Long">
+        delete from bus_company where company_id = #{companyId}
+    </delete>
+
+    <delete id="deleteBusCompanyByCompanyIds" parameterType="String">
+        delete from bus_company where company_id in 
+        <foreach item="companyId" collection="array" open="(" separator="," close=")">
+            #{companyId}
+        </foreach>
+    </delete>
+
+    <select id="countCompany" resultType="java.lang.Integer">
+        select count(*) from bus_company
+    </select>
+
+    <select id="countMemberCompany" resultType="java.lang.Integer">
+        select count(*) from bus_company where member_flag = 'Y'
+    </select>
+
+</mapper>
