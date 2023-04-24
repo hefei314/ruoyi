@@ -46,7 +46,7 @@
         select t.classify_id, t.parent_id, t.ancestors, t.classify_logo, t.classify_name, t.order_num, t.status, t.del_flag, t.create_by, t.create_date, t.update_by, t.update_time, p.classify_name as parent_name
         from bus_classify t
         left join bus_classify p on p.classify_id = t.parent_id
-        where t.parent_id = #{parentId}
+        where t.parent_id = #{parentId} and t.status = 0
     </select>
 
     <select id="selectChildrenClassifyById" parameterType="Long" resultMap="BusClassifyResult">
