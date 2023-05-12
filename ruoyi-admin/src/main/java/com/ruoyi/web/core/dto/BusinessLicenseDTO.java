@@ -1,4 +1,4 @@
-package com.ruoyi.web.core.tencent;
+package com.ruoyi.web.core.dto;
 
 /**
  * <pre>

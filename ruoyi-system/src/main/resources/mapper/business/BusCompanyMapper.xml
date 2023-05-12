@@ -60,7 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectBusCompanyList" parameterType="BusCompany" resultMap="BusCompanyResult">
         select c.company_id, c.classify_id, p.classify_name, c.user_id, c.short_name, c.company_name, c.company_logo, c.website, c.contact_way, c.legal_person, c.register_date, c.opening_start_time, c.opening_end_time, c.scale, c.scale_name, c.register_capital, c.register_capital_name, c.company_business, c.introduction, c.province_id, c.province_name, c.city_id, c.city_name, c.area_id, c.area_name, c.address, c.latitude, c.longitude, c.business_license, c.identity_card_front, c.identity_card_back, c.status, c.member_flag, c.member_begin_date, c.member_end_date, c.member_province_id, c.member_province_name, c.member_city_id, c.member_city_name, c.member_area_id, c.member_area_name, c.member_order, c.del_flag, c.create_by, c.create_date, c.update_by, c.update_date
-        from bus_company c
+        from bus_company c order by c.member_order DESC
         left join bus_classify p on c.classify_id = p.classify_id
         <where>
             <if test="classifyId != null "> and c.classify_id = #{classifyId}</if>

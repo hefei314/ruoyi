@@ -68,13 +68,18 @@
             updateUrl: prefix + "/edit/{id}",
             removeUrl: prefix + "/remove/{id}",
             modalName: "分类信息",
-            columns: [{
-                field: 'selectItem',
-                radio: true
-            },
+            columns: [
+                {
+                    field: 'selectItem',
+                    radio: true
+                },
                 {
                     field: 'classifyName',
                     title: '分类名称',
+                    align: 'left'
+                }, {
+                    field: 'classifyId',
+                    title: '分类ID',
                     align: 'left'
                 },
                 {

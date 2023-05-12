@@ -9,7 +9,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 意见反馈信息对象 bus_feedback
- * 
+ *
  * @author ruoyi
  * @date 2022-11-08
  */
@@ -36,48 +36,48 @@ public class BusFeedback extends BaseEntity
     @Excel(name = "反馈时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date feedbackTime;
 
-    public void setFeedbackId(Long feedbackId) 
+    public void setFeedbackId(Long feedbackId)
     {
         this.feedbackId = feedbackId;
     }
 
-    public Long getFeedbackId() 
+    public Long getFeedbackId()
     {
         return feedbackId;
     }
-    public void setUserId(Long userId) 
+    public void setUserId(Long userId)
     {
         this.userId = userId;
     }
 
-    public Long getUserId() 
+    public Long getUserId()
     {
         return userId;
     }
-    public void setFeedbackContent(String feedbackContent) 
+    public void setFeedbackContent(String feedbackContent)
     {
         this.feedbackContent = feedbackContent;
     }
 
-    public String getFeedbackContent() 
+    public String getFeedbackContent()
     {
         return feedbackContent;
     }
-    public void setFeedbackBy(String feedbackBy) 
+    public void setFeedbackBy(String feedbackBy)
     {
         this.feedbackBy = feedbackBy;
     }
 
-    public String getFeedbackBy() 
+    public String getFeedbackBy()
     {
         return feedbackBy;
     }
-    public void setFeedbackTime(Date feedbackTime) 
+    public void setFeedbackTime(Date feedbackTime)
     {
         this.feedbackTime = feedbackTime;
     }
 
-    public Date getFeedbackTime() 
+    public Date getFeedbackTime()
     {
         return feedbackTime;
     }
@@ -85,11 +85,11 @@ public class BusFeedback extends BaseEntity
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("feedbackId", getFeedbackId())
-            .append("userId", getUserId())
-            .append("feedbackContent", getFeedbackContent())
-            .append("feedbackBy", getFeedbackBy())
-            .append("feedbackTime", getFeedbackTime())
-            .toString();
+                .append("feedbackId", getFeedbackId())
+                .append("userId", getUserId())
+                .append("feedbackContent", getFeedbackContent())
+                .append("feedbackBy", getFeedbackBy())
+                .append("feedbackTime", getFeedbackTime())
+                .toString();
     }
 }
