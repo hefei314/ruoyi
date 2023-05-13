@@ -71,7 +71,7 @@
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="parentId != null">#{parentId},</if>
             <if test="ancestors != null">#{ancestors},</if>
-            <if test="classifyLogo != null">#{classify_logo},</if>
+            <if test="classifyLogo != null">#{classifyLogo},</if>
             <if test="classifyName != null">#{classifyName},</if>
             <if test="orderNum != null">#{orderNum},</if>
             <if test="status != null">#{status},</if>
