@@ -17,6 +17,8 @@ public class PayConfigDTO {
 
     private List<SysDictData> payTypeList;
 
+    private List<SysDictData> payYearList;
+
     public String getPrice() {
         return price;
     }
@@ -31,5 +33,13 @@ public class PayConfigDTO {
 
     public void setPayTypeList(List<SysDictData> payTypeList) {
         this.payTypeList = payTypeList;
+    }
+
+    public List<SysDictData> getPayYearList() {
+        return payYearList;
+    }
+
+    public void setPayYearList(List<SysDictData> payYearList) {
+        this.payYearList = payYearList;
     }
 }

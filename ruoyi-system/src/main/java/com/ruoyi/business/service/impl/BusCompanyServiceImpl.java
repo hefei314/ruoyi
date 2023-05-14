@@ -64,6 +64,16 @@ public class BusCompanyServiceImpl implements IBusCompanyService {
     }
 
     /**
+     * 查询当前最大的排序商户
+     *
+     * @return 商户信息
+     */
+    @Override
+    public BusCompany selectBusCompanyMaxMemberOrder() {
+        return companyMapper.selectBusCompanyMaxMemberOrder();
+    }
+
+    /**
      * 查询商户信息列表
      *
      * @param busCompany 商户信息

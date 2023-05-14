@@ -93,6 +93,17 @@ public class ApiController extends BaseController {
     private IBusFeedbackService busFeedbackService;
 
     /**
+     * 查询客服电话
+     */
+    @GetMapping("/common/getKefuPhone")
+    @ResponseBody
+    public List<SysDictData> getKefuPhone() {
+        SysDictData sysDictData = new SysDictData();
+        sysDictData.setDictType("bus_kefu_phone");
+        return sysDictDataService.selectDictDataList(sysDictData);
+    }
+
+    /**
      * 查询公司规模列表
      */
     @GetMapping("/common/getScaleList")
@@ -120,6 +131,15 @@ public class ApiController extends BaseController {
     @GetMapping("/common/getClassifyList")
     @ResponseBody
     public List<BusClassify> getClassifyList() {
+        return busClassifyService.selectBusClassifyByParentId(1L);
+    }
+
+    /**
+     * 查询公司分类列表
+     */
+    @GetMapping("/common/getSearchClassifyList")
+    @ResponseBody
+    public List<BusClassify> getSearchClassifyList() {
         List<BusClassify> result = busClassifyService.selectBusClassifyByParentId(1L);
         BusClassify all = new BusClassify();
         all.setClassifyId(0L);
@@ -174,6 +194,7 @@ public class ApiController extends BaseController {
             PayConfigDTO payConfigDTO = new PayConfigDTO();
             payConfigDTO.setPrice(getMemberPrice());
             payConfigDTO.setPayTypeList(sysDictTypeService.selectDictDataByType("bus_pay_type"));
+            payConfigDTO.setPayYearList(sysDictTypeService.selectDictDataByType("bus_pay_year"));
             return success(payConfigDTO);
         } catch (Exception e) {
             return error(e.getMessage());
@@ -207,6 +228,7 @@ public class ApiController extends BaseController {
                 BusPayLog busPayLog = busPayLogService.selectBusPayLogByOutTradeNo(params.get("out_trade_no"));
                 if (busPayLog != null && "1".equalsIgnoreCase(busPayLog.getStatus())) {
                     BusCompany busCompany = busCompanyService.selectBusCompanyByCompanyId(busPayLog.getCompanyId());
+                    BusCompany memberCompany = busCompanyService.selectBusCompanyMaxMemberOrder();
                     if (busCompany != null) {
                         if ("Y".equalsIgnoreCase(busCompany.getMemberFlag())) {
                             busCompany.setMemberEndDate(getMemberEndDate(busCompany.getMemberEndDate(), getYear(busPayLog.getSubject())));
@@ -215,7 +237,7 @@ public class ApiController extends BaseController {
                             busCompany.setMemberFlag("Y");
                             busCompany.setMemberBeginDate(beginDate);
                             busCompany.setMemberEndDate(getMemberEndDate(busCompany.getMemberBeginDate(), getYear(busPayLog.getSubject())));
-                            busCompany.setMemberOrder(beginDate.getTime());
+                            busCompany.setMemberOrder(memberCompany == null ? 1 : memberCompany.getMemberOrder() + 1);
                         }
                         busCompanyService.updateBusCompany(busCompany);
                     }
@@ -249,6 +271,7 @@ public class ApiController extends BaseController {
                 BusPayLog busPayLog = busPayLogService.selectBusPayLogByOutTradeNo(jsonObject.getString("out_trade_no"));
                 if (busPayLog != null && "1".equalsIgnoreCase(busPayLog.getStatus())) {
                     BusCompany busCompany = busCompanyService.selectBusCompanyByCompanyId(busPayLog.getCompanyId());
+                    BusCompany memberCompany = busCompanyService.selectBusCompanyMaxMemberOrder();
                     if (busCompany != null) {
                         if ("Y".equalsIgnoreCase(busCompany.getMemberFlag())) {
                             busCompany.setMemberEndDate(getMemberEndDate(busCompany.getMemberEndDate(), getYear(busPayLog.getSubject())));
@@ -257,7 +280,7 @@ public class ApiController extends BaseController {
                             busCompany.setMemberFlag("Y");
                             busCompany.setMemberBeginDate(beginDate);
                             busCompany.setMemberEndDate(getMemberEndDate(busCompany.getMemberBeginDate(), getYear(busPayLog.getSubject())));
-                            busCompany.setMemberOrder(beginDate.getTime());
+                            busCompany.setMemberOrder(memberCompany == null ? 1 : memberCompany.getMemberOrder() + 1);
                         }
                         busCompanyService.updateBusCompany(busCompany);
                     }

@@ -29,6 +29,13 @@ public interface IBusCompanyService
     public BusCompany selectBusCompanyByUserId(Long userId);
 
     /**
+     * 查询当前最大的排序商户
+     *
+     * @return 商户信息
+     */
+    public BusCompany selectBusCompanyMaxMemberOrder();
+
+    /**
      * 查询商户信息列表
      * 
      * @param busCompany 商户信息
