@@ -59,4 +59,9 @@ public interface IBusPayLogService {
      * @return 结果
      */
     public int deleteBusPayLogByOutTradeNo(String outTradeNo);
+
+    /**
+     * 获取总收入
+     */
+    public double countTotalAmount();
 }

@@ -24,7 +24,8 @@
     </sql>
 
     <select id="selectBusPayLogList" parameterType="BusPayLog" resultMap="BusPayLogResult">
-        select p.user_id, u.user_name, p.company_id, c.company_name, p.out_trade_no, p.total_amount, p.subject, p.status, p.pay_type, p.pay_time, p.refund_time, p.create_time
+        select p.user_id, u.user_name, p.company_id, c.company_name, p.out_trade_no, p.total_amount, p.subject,
+        p.status, p.pay_type, p.pay_time, p.refund_time, p.create_time
         from bus_pay_log p
         left join bus_user u on u.user_id = p.user_id
         left join bus_company c on c.company_id = p.company_id
@@ -94,5 +95,9 @@
             #{outTradeNo}
         </foreach>
     </delete>
+
+    <select id="countTotalAmount" resultType="java.lang.Double">
+        select sum(total_amount) from bus_pay_log where status = 0
+    </select>
 
 </mapper>

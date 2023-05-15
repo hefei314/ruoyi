@@ -1,6 +1,7 @@
 package com.ruoyi.web.controller.system;
 
 import com.ruoyi.business.service.IBusCompanyService;
+import com.ruoyi.business.service.IBusPayLogService;
 import com.ruoyi.business.service.IBusUserService;
 import com.ruoyi.common.config.RuoYiConfig;
 import com.ruoyi.common.constant.ShiroConstants;
@@ -47,8 +48,12 @@ public class SysIndexController extends BaseController {
 
     @Autowired
     private IBusUserService busUserService;
+
     @Autowired
     private IBusCompanyService busCompanyService;
+
+    @Autowired
+    private IBusPayLogService payLogService;
 
     // 系统首页
     @GetMapping("/index")
@@ -127,7 +132,7 @@ public class SysIndexController extends BaseController {
     // 系统介绍
     @GetMapping("/system/main")
     public String main(ModelMap mmap) {
-        mmap.put("income", "10000");
+        mmap.put("income", payLogService.countTotalAmount());
         mmap.put("userCount", busUserService.countUser());
         mmap.put("companyCount", busCompanyService.countCompany());
         mmap.put("memberCompanyCount", busCompanyService.countMemberCompany());

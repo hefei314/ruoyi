@@ -86,4 +86,12 @@ public class BusPayLogServiceImpl implements IBusPayLogService {
     public int deleteBusPayLogByOutTradeNo(String outTradeNo) {
         return busPayLogMapper.deleteBusPayLogByOutTradeNo(outTradeNo);
     }
+
+    /**
+     * 获取总收入
+     */
+    @Override
+    public double countTotalAmount() {
+        return busPayLogMapper.countTotalAmount();
+    }
 }

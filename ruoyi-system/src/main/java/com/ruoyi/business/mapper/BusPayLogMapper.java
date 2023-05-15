@@ -59,4 +59,9 @@ public interface BusPayLogMapper {
      * @return 结果
      */
     public int deleteBusPayLogByOutTradeNos(String[] outTradeNos);
+
+    /**
+     * 获取总收入
+     */
+    public double countTotalAmount();
 }
