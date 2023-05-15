@@ -1,5 +1,6 @@
 package com.ruoyi.business.service.impl;
 
+import com.ruoyi.business.domain.BusArea;
 import com.ruoyi.business.domain.BusCompany;
 import com.ruoyi.business.domain.BusUserCompany;
 import com.ruoyi.business.mapper.BusCompanyMapper;
@@ -198,9 +199,9 @@ public class BusCompanyServiceImpl implements IBusCompanyService {
                 company.setClassifyName(busClassifyService.selectBusClassifyByClassifyId(company.getClassifyId()).getClassifyName());
                 company.setScaleName(sysDictDataService.selectDictLabel("bus_company_scale", company.getScale()));
                 company.setRegisterCapitalName(sysDictDataService.selectDictLabel("bus_register_capital", company.getRegisterCapital()));
-                company.setProvinceId(busAreaService.selectBusAreaByAreaName(company.getProvinceName()).getAreaId());
-                company.setCityId(busAreaService.selectBusAreaByAreaName(company.getCityName()).getAreaId());
-                company.setAreaId(busAreaService.selectBusAreaByAreaName(company.getAreaName()).getAreaId());
+                company.setProvinceId(getAreaId(0L, company.getProvinceName()));
+                company.setCityId(getAreaId(company.getProvinceId(), company.getCityName()));
+                company.setAreaId(getAreaId(company.getCityId(), company.getAreaName()));
                 // 验证是否存在这个商户
                 BusCompany u = companyMapper.selectBusCompanyByCompanyName(company.getCompanyName());
                 if (StringUtils.isNull(u)) {
@@ -219,6 +220,7 @@ public class BusCompanyServiceImpl implements IBusCompanyService {
                     failureMsg.append("<br/>" + failureNum + "、商户 " + company.getCompanyName() + " 已存在");
                 }
             } catch (Exception e) {
+                e.printStackTrace();
                 failureNum++;
                 String msg = "<br/>" + failureNum + "、商户 " + company.getCompanyName() + " 导入失败：";
                 failureMsg.append(msg + e.getMessage());
@@ -231,6 +233,17 @@ public class BusCompanyServiceImpl implements IBusCompanyService {
             successMsg.insert(0, "恭喜您，数据已全部导入成功！共 " + successNum + " 条，数据如下：");
         }
         return successMsg.toString();
+    }
+
+    private Long getAreaId(Long parentId, String areaName) {
+        BusArea busArea = new BusArea();
+        busArea.setParentId(parentId);
+        busArea.setName(areaName);
+        List<BusArea> list = busAreaService.selectBusAreaList(busArea);
+        if (list != null && list.size() > 0) {
+            return list.get(0).getAreaId();
+        }
+        return 0L;
     }
 
     /**
