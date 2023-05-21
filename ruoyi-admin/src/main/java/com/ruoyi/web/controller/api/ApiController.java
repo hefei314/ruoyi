@@ -642,6 +642,35 @@ public class ApiController extends BaseController {
     }
 
     /**
+     * 账号注销
+     */
+    @PostMapping("/user/cancellation")
+    @ResponseBody
+    public AjaxResult cancellation(HttpServletRequest request) {
+        JWTUtils jwtUtils = new JWTUtils();
+        String token = request.getHeader(JWTUtils.TOKEN_HEADER);
+        if (!jwtUtils.validateToken(token)) {
+            return error(AjaxResult.Type.UNAUTHORIZED, "请先登录!");
+        }
+
+        Long userId = getLoginUserId(request);
+
+        // 删除用户信息
+        busUserService.deleteBusUserByUserId(userId);
+        // 删除用户绑定的商户
+        BusCompany company = busCompanyService.selectBusCompanyByUserId(userId);
+        if (company != null) {
+            busCompanyService.deleteBusCompanyByCompanyId(company.getCompanyId());
+        }
+        // 删除用户收藏的商户列表
+        busCompanyService.deleteUserCompanyByUserId(userId);
+
+        CacheUtils.remove(jwtUtils.getUserIdFromToken(token));
+
+        return success();
+    }
+
+    /**
      * 退出登录
      */
     @PostMapping("/user/logout")

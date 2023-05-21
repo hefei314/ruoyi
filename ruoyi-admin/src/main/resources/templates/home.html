@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>祀界</title>
+    <meta name="description" content="祀界">
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet" />
+    <link href="../static/css/style.min.css" th:href="@{/css/style.min.css}" rel="stylesheet" />
+    <link href="../static/css/home.css" th:href="@{/css/home.css}" rel="stylesheet" />
+    <link href="../static/ruoyi/css/ry-ui.css" th:href="@{/ruoyi/css/ry-ui.css?v=4.7.5}" rel="stylesheet" />
+    <!-- 360浏览器急速模式 -->
+    <meta name="renderer" content="webkit">
+    <!-- 避免IE使用兼容模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="../static/favicon.ico" th:href="@{favicon.ico}" />
+    <style type="text/css">
+        label.error {
+            position: inherit;
+        }
+    </style>
+</head>
+
+<body class="index">
+    <div>
+        <div class="top"></div>
+        <p style="font-weight: 400;font-style: normal;font-size: 55px;color: #333333; margin-top: 40px;">祀界让殡葬类搜索变得更加简单
+        </p>
+        <p style="font-weight: 400;font-style: normal;font-size: 25px;color: #686868;">是一款殡葬类搜索平台</p>
+        <p style="font-weight: 400;font-style: normal;font-size: 15px;color: #686868;">
+            祀界是一款生活服务类的综合应用平台，主要做殡葬类用品、殡葬服务、殡葬公司、厂家的搜索，为需要殡葬类用品、服务的用户提供准确、完善的服务。</p>
+
+        <a href="https://shouji.baidu.com/detail/5000040521" target="_blank" class="btn download">现在下载</a>
+
+        <p style="font-weight: 400;font-style: normal;font-size: 36px; color: #666666; margin-top: 40px;">应用截图</p>
+        <div class="row" style="margin-top: 40px;">
+            <img th:src="@{/img/intro1.png}" class="span3" style="max-width: 300px;">
+            <img th:src="@{/img/intro2.png}" class="span3" style="max-width: 300px;margin-left: 10px;">
+            <img th:src="@{/img/intro3.png}" class="span3" style="max-width: 300px;margin-left: 10px;">
+            <img th:src="@{/img/intro4.png}" class="span3" style="max-width: 300px;margin-left: 10px;">
+        </div>
+
+        <div class="signup-footer">
+            <div class="pull-left">
+                Copyright © 2022 祀界 All Rights Reserved. <br>
+            </div>
+        </div>
+    </div>
+    <!-- 全局js -->
+    <script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+    <script src="../static/ajax/libs/validate/jquery.validate.min.js"
+        th:src="@{/ajax/libs/validate/jquery.validate.min.js}"></script>
+    <script src="../static/ajax/libs/layer/layer.min.js" th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+    <script src="../static/ajax/libs/blockUI/jquery.blockUI.js"
+        th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
+    <script src="../static/ruoyi/js/ry-ui.js" th:src="@{/ruoyi/js/ry-ui.js?v=4.7.5}"></script>
+</body>
+
+</html>

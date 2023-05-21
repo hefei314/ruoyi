@@ -94,6 +94,11 @@ public class SysIndexController extends BaseController {
         return webIndex;
     }
 
+    @GetMapping("/home")
+    public String home(ModelMap mmap) {
+        return "home";
+    }
+
     // 锁定屏幕
     @GetMapping("/lockscreen")
     public String lockscreen(ModelMap mmap) {

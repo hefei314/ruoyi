@@ -83,6 +83,14 @@ public interface IBusCompanyService
     public List<BusCompany> selectUserCompanyByUserId(Long userId);
 
     /**
+     * 删除用户收藏的商户列表
+     *
+     * @param userId 用户ID
+     * @return 结果
+     */
+    public int deleteUserCompanyByUserId(Long userId);
+
+    /**
      * 检验用户是否收藏商户
      * @param userId 用户ID
      * @param companyId 公司ID

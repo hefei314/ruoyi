@@ -280,6 +280,7 @@ public class ShiroConfig
         filterChainDefinitionMap.put("/favicon.ico**", "anon");
         filterChainDefinitionMap.put("/ruoyi.png**", "anon");
         filterChainDefinitionMap.put("/html/**", "anon");
+        filterChainDefinitionMap.put("/index2", "anon");
         filterChainDefinitionMap.put("/protocol/**", "anon");
         filterChainDefinitionMap.put("/css/**", "anon");
         filterChainDefinitionMap.put("/docs/**", "anon");

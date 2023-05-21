@@ -1,0 +1,75 @@
+html {
+	height: 100%
+}
+
+body.index {
+	height: auto;
+	background-color: rgba(243, 243, 243, 1);
+	text-align: center;
+	color: #333333;
+	font-family: '微软雅黑';
+}
+
+.top {
+	height: 50px;
+	color: #FFFFFF;
+	background-color: #57B331;
+}
+
+.download {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 40px;
+	padding-right: 40px;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 20px;
+	color: #FFFFFF;
+	background-color: #57B331;
+	margin-top: 20px;
+}
+
+.img1 {
+	width: 300px;
+	height: 500px;
+	background: url(../img/login-background.jpg) no-repeat center fixed;
+	background-size: cover
+}
+
+.img2 {
+	width: 300px;
+	height: 500px;
+	background: url(../img/intro2.png) no-repeat center fixed;
+	background-size: cover
+}
+
+.img3 {
+	width: 300px;
+	height: 500px;
+	background: url(../img/intro3.png) no-repeat center fixed;
+	background-size: cover
+}
+
+.img4 {
+	width: 300px;
+	height: 500px;
+	background: url(../img/intro4.png) no-repeat center fixed;
+	background-size: cover
+}
+
+.signup-footer {
+	border-top: solid 1px rgba(255, 255, 255, .3);
+	margin: 20px 0;
+	padding-top: 15px
+}
+
+.signup-footer,
+.signuppanel .form-control {
+	margin-bottom: 10px
+}
+
+.signup-footer .pull-left,
+.signup-footer .pull-right {
+	float: none !important;
+	text-align: center
+}

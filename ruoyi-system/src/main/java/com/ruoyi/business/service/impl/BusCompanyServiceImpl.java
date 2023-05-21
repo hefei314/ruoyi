@@ -143,6 +143,17 @@ public class BusCompanyServiceImpl implements IBusCompanyService {
     }
 
     /**
+     * 删除用户收藏的商户列表
+     *
+     * @param userId 用户ID
+     * @return 结果
+     */
+    @Override
+    public int deleteUserCompanyByUserId(Long userId) {
+        return userCompanyMapper.deleteUserCompanyByUserId(userId);
+    }
+
+    /**
      * 检验用户是否收藏商户
      *
      * @param userId    用户ID
